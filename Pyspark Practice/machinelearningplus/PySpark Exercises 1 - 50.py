@@ -821,7 +821,148 @@ df.summary().show()
 
 ###############################################################################
 
-#19
+#19 How to calculate the number of characters in each word in a column?
+
+"""
+# Suppose you have the following DataFrame
+data = [("john",), ("alice",), ("bob",)]
+df = spark.createDataFrame(data, ["name"])
+
+df.show()
++-----+
+| name|
++-----+
+| john|
+|alice|
+| bob|
++-----+
+"""
+
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import max, count, col, rank, row_number, monotonically_increasing_id, when, upper, length
+
+spark = SparkSession.builder.appName('Spark Playground').getOrCreate()
+
+data = [("john",), ("alice",), ("bob",)]
+df = spark.createDataFrame(data, ["name"])
+
+df.withColumn("Count",length(col("name"))).show()
+
+
++-----+-----+
+| name|Count|
++-----+-----+
+| john|    4|
+|alice|    5|
+|  bob|    3|
++-----+-----+
+
+
+###############################################################################
+
+#20 How to compute difference of differences between consecutive numbers of a column?
+
+"""
+# For the sake of example, we'll create a sample DataFrame
+data = [('James', 34, 55000),
+('Michael', 30, 70000),
+('Robert', 37, 60000),
+('Maria', 29, 80000),
+('Jen', 32, 65000)]
+
+df = spark.createDataFrame(data, ["name", "age" , "salary"])
+
+df.show()
++-------+---+------+
+| name|age|salary|
++-------+---+------+
+| James| 34| 55000|
+|Michael| 30| 70000|
+| Robert| 37| 60000|
+| Maria| 29| 80000|
+| Jen| 32| 65000|
++-------+---+------+
+"""
+
+
+# Initialize Spark session
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import max, count, col, rank, row_number, monotonically_increasing_id, when, upper, length
+
+spark = SparkSession.builder.appName('Spark Playground').getOrCreate()
+
+# For the sake of example, we'll create a sample DataFrame
+data = [('James', 34, 55000),
+('Michael', 30, 70000),
+('Robert', 37, 60000),
+('Maria', 29, 80000),
+('Jen', 32, 65000)]
+df = spark.createDataFrame(data, ["name", "age" , "salary"])
+
+list1 = []
+
+i = 0
+
+while i < len(df.collect()) - 1:
+  list1.append((df.collect()[i][0],df.collect()[i][1],
+                df.select('salary').collect()[i+1][0] -  df.select('salary').collect()[i][0]))
+  i = i + 1
+
+
+
+df = spark.createDataFrame(list1, ["name", "age" , "diff_to_next_person"]).show()
++-------+---+-------------------+
+|   name|age|diff_to_next_person|
++-------+---+-------------------+
+|  James| 34|              15000|
+|Michael| 30|             -10000|
+| Robert| 37|              20000|
+|  Maria| 29|             -15000|
++-------+---+-------------------+
+
+
+
+###############################################################################
+
+
+#21. How to get the day of month, week number, day of year and day of week from a date strings?
+
+
+"""
+data = [("2023-05-18","01 Jan 2010",), ("2023-12-31", "01 Jan 2010",)]
+df = spark.createDataFrame(data, ["date_str_1", "date_str_2"])
+
+df.show()
++----------+-----------+
+|date_str_1| date_str_2|
++----------+-----------+
+|2023-05-18|01 Jan 2010|
+|2023-12-31|01 Jan 2010|
++----------+-----------+
+"""
+
+
+
+# Initialize Spark session
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import day, month, year, col
+
+spark = SparkSession.builder.appName('Spark Playground').getOrCreate()
+
+data = [("2023-05-18","01 Jan 2010",), ("2023-12-31", "01 Jan 2010",)]
+df = spark.createDataFrame(data, ["date_str_1", "date_str_2"])
+
+df = df.withColumn("day_1",day(col("date_str_1")))
+df = df.withColumn("month_1",month(col("date_str_1")))
+df = df.withColumn("year_1",year(col("date_str_1")))
+
+df.show()
++----------+-----------+-----+-------+------+
+|date_str_1| date_str_2|day_1|month_1|year_1|
++----------+-----------+-----+-------+------+
+|2023-05-18|01 Jan 2010|   18|      5|  2023|
+|2023-12-31|01 Jan 2010|   31|     12|  2023|
++----------+-----------+-----+-------+------+
 
 
 
@@ -830,9 +971,173 @@ df.summary().show()
 
 
 
+# Initialize Spark session
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName('Spark Playground').getOrCreate()
+
+from pyspark.sql.functions import to_date, dayofmonth, weekofyear, dayofyear, dayofweek, col
+
+data = [("2023-05-18","01 Jan 2010",), ("2023-12-31", "01 Jan 2010",)]
+df = spark.createDataFrame(data, ["date_str_1", "date_str_2"])
+
+# Convert date string to date format
+df = df.withColumn("date_1", to_date(df.date_str_1, 'yyyy-MM-dd'))
+df = df.withColumn("date_2", to_date(df.date_str_2, 'dd MMM yyyy'))
+
+df = df.withColumn("day_of_month", dayofmonth(df.date_1))\
+.withColumn("week_number", weekofyear(df.date_1))\
+.withColumn("day_of_year", dayofyear(df.date_1))\
+.withColumn("day_of_week", dayofweek(df.date_1))
+
+df.show()
+
++----------+-----------+----------+----------+------------+-----------+-----------+-----------+
+|date_str_1| date_str_2|    date_1|    date_2|day_of_month|week_number|day_of_year|day_of_week|
++----------+-----------+----------+----------+------------+-----------+-----------+-----------+
+|2023-05-18|01 Jan 2010|2023-05-18|2010-01-01|          18|         20|        138|          5|
+|2023-12-31|01 Jan 2010|2023-12-31|2010-01-01|          31|         52|        365|          1|
++----------+-----------+----------+----------+------------+-----------+-----------+-----------+
 
 
 
+
+
+
+###############################################################################
+
+
+#22 How to convert year-month string to dates corresponding to the 4th day of the month?
+
+"""
+df = spark.createDataFrame([('Jan 2010',), ('Feb 2011',), ('Mar 2012',)], ['MonthYear'])
+
+df.show()
++---------+
+|MonthYear|
++---------+
+| Jan 2010|
+| Feb 2011|
+| Mar 2012|
++---------+
+"""
+
+# Initialize Spark session
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName('Spark Playground').getOrCreate()
+
+from pyspark.sql.functions import to_date, dayofmonth, weekofyear, dayofyear, dayofweek, col, concat, lit
+
+df = spark.createDataFrame([('Jan 2010',), ('Feb 2011',), ('Mar 2012',)], ['MonthYear'])
+
+df.withColumn("MonthYear",concat(lit("4"),lit(" "),col("MonthYear"))).show()
+
+
++----------+
+| MonthYear|
++----------+
+|4 Jan 2010|
+|4 Feb 2011|
+|4 Mar 2012|
++----------+
+
+
+
+
+
+###############################################################################
+
+#23 How to filter words that contain atleast 2 vowels from a series?
+
+"""
+df = spark.createDataFrame([('Apple',), ('Orange',), ('Plan',) , ('Python',) , ('Money',)], ['Word'])
+
+df.show()
++------+
+| Word|
++------+
+| Apple|
+|Orange|
+| Plan|
+|Python|
+| Money|
++------+
+"""
+
+
+# Initialize Spark session
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName('Spark Playground').getOrCreate()
+
+from pyspark.sql.functions import to_date, dayofmonth, weekofyear, dayofyear, dayofweek, col, concat, lit
+
+df = spark.createDataFrame([('Apple',), ('Orange',), ('Plan',) , ('Python',) , ('Money',)], ['Word'])
+
+list1 = []
+vowls = ["a","e","i","o","u"]
+
+for n in df.collect():
+  t = 0
+  for v in n[0].lower():
+    if v in vowls:
+      t = t + 1
+      if t == 2:
+        break
+    elif len(n[0]) - 1 == t:
+      list1.append((n[0],))
+    else:
+      t = t + 1
+
+df = spark.createDataFrame(list1,["Letters_not_woth_two"]).show()
+
+
+
+###############################################################################
+
+#24 How to filter valid emails from a list?
+
+"""
+# Create a list
+data = ['buying books at amazom.com', 'rameses@egypt.com', 'matt@t.co', 'narendra@modi.com']
+
+# Convert the list to DataFrame
+df = spark.createDataFrame(data, "string")
+df.show(truncate =False)
++--------------------------+
+|value |
++--------------------------+
+|buying books at amazom.com|
+|rameses@egypt.com |
+|matt@t.co |
+|narendra@modi.com |
++--------------------------+
+"""
+
+
+# Initialize Spark session
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName('Spark Playground').getOrCreate()
+
+from pyspark.sql.functions import col, lit, contains, when
+
+data = [('buying books at amazom.com',), ('rameses@egypt.com',), ('matt@t.co',),( 'narendra@modi.com',)]
+
+# Convert the list to DataFrame
+df = spark.createDataFrame(data, ["string"])
+
+df.withColumn("Correct", when(col("string")
+                              .contains(".com") & col("string")
+                              .contains("@"),lit("correct")).otherwise(lit("incorrect"))).show()
+
+
+
+
+###############################################################################
+
+#25
 
 
 
