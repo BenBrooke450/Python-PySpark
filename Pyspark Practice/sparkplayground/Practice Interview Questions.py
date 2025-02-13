@@ -256,6 +256,100 @@ display(df)
 
 
 
+"""
+Remove Duplicates From Dataset
+
+
+
+Given a dataset containing user information with duplicate
+    user_id values, write a PySpark query to remove duplicate 
+    rows while retaining the row with the latest created_date 
+    for each user_id. The result should contain the latest entry for each user.
+    
+"""
+
+
+from pyspark.sql import SparkSession
+from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DateType
+from datetime import date
+from pyspark.sql.functions import col, lit, contains, when, sum, avg, max
+
+# Initialize Spark session
+spark = SparkSession.builder \
+    .appName("RemoveDuplicates") \
+    .getOrCreate()
+
+# Define schema
+schema = StructType([
+    StructField("user_id", IntegerType(), True),
+    StructField("user_name", StringType(), True),
+    StructField("created_date", DateType(), True),
+    StructField("email", StringType(), True)
+])
+
+# Sample data
+data = [
+    (1, "Alice", date(2023, 5, 10), "alice@example.com"),
+    (1, "Alice", date(2023, 6, 15), "alice_new@example.com"),
+    (2, "Bob", date(2023, 7, 1), "bob@example.com"),
+    (3, "Charlie", date(2023, 5, 20), "charlie@example.com"),
+    (3, "Charlie", date(2023, 6, 25), "charlie_updated@example.com"),
+    (4, "David", date(2023, 8, 5), "david@example.com")
+]
+
+# Create DataFrame
+user_df = spark.createDataFrame(data, schema)
+
+df = user_df.groupBy("user_id","user_name").agg(max("created_date"),max("email"))
+
+display(df.withColumnRenamed("max(created_date)","created_date",).withColumnRenamed("max(email)","email"))
+
+
+
+
+
+################################################################################
+
+
+"""
+Word Count Program in PySpark
+
+
+Write a PySpark program to count the occurrences of each word 
+    in a given text file. The solution must utilize RDD transformations
+     and actions for processing, and then convert the final RDD into a 
+     DataFrame for output. Sort DataFrame by count in descending order.
+"""
+
+# Initialize Spark session
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName('Spark Playground').getOrCreate()
+
+#enter the file path here
+file_path = "/datasets/notes.txt"
+
+#read the file
+df = spark.read.text(file_path)
+
+# Display the final DataFrame using the display() function.
+list1 = []
+for n in df.collect()[:]:
+  list1.append(n[0])
+
+list1 = " ".join(list1)
+list1 = list1.split(" ")
+
+
+list2=[]
+for m in list1:
+  list2.append((m,list1.count(m)))
+
+set2 = set(list2)
+
+df = spark.createDataFrame(set2,["word","count"])
+
+display(df.orderBy("count"))
+
 
 
 
