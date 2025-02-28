@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1afb76af-9c11-4edd-855c-4bf873990b13" name="Changes" comment="Basic">
-      <change afterPath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/5.DAY.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/6.DAY.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,6 +47,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/benjaminbrooke/PycharmProjects/Other Python Libraries/Python_PySpark",
     "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "preferences.keymap"
   }
@@ -162,7 +161,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740054811047</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Basic">
+      <option name="closed" value="true" />
+      <created>1740341669357</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1740341669357</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Basic">
+      <option name="closed" value="true" />
+      <created>1740595890965</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1740595890965</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
