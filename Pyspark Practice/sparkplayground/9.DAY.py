@@ -93,6 +93,41 @@ only showing top 20 rows
 
 
 
+test = (df_electric_cars_casualty.withColumn("rank_over_avg_age",row_number()
+                                            .over(Window.partitionBy("generic_make_model")
+                                                  .orderBy("average_age_of_vehicle")))
+        .filter(col("rank_over_avg_age")<3).orderBy(col("average_age_of_vehicle").desc()))
+
+test = test.select("generic_make_model","average_age_of_vehicle","rank_over_avg_age")
+
+test.groupBy("generic_make_model")
+    .pivot("rank_over_avg_age")
+    .max("average_age_of_vehicle").display()
++-------------------+------------------+------------------+
+| generic_make_model|                 1|                 2|
++-------------------+------------------+------------------+
+|        AUDI E-TRON|               2.0|               2.0|
+|            AUDI Q4|0.8108108108108109|0.8108108108108109|
+|            AUDI Q8|2.1538461538461537|2.1538461538461537|
+|             BMW I3|4.3578947368421055|4.3578947368421055|
+|             BMW I4|0.5588235294117647|0.5588235294117647|
+|             BMW IX|0.5172413793103449|0.5172413793103449|
+|    CHEVROLET SPARK|             11.05|             11.05|
+|FORD MUSTANG MACH-E|1.0714285714285714|1.0714285714285714|
+|        FORD RANGER| 5.078947368421052| 5.078947368421052|
+|         HONDA CR-V|11.543668122270743|11.543668122270743|
+|      HYUNDAI IONIQ| 3.694704049844237| 3.694704049844237|
+|       HYUNDAI KONA| 1.948356807511737| 1.948356807511737|
+|      JAGUAR I-PACE|2.5185185185185186|2.5185185185185186|
+|            KIA EV6|              0.85|              0.85|
+|           KIA NIRO|2.4273318872017353|2.4273318872017353|
+|           KIA SOUL| 9.442307692307692| 9.442307692307692|
+|       NISSAN ARIYA|               0.3|               0.3|
+|        NISSAN LEAF|3.6700507614213196|3.6700507614213196|
+|      PORSCHE MACAN| 4.449275362318841| 4.449275362318841|
+|     PORSCHE TAYCAN|1.2857142857142858|1.2857142857142858|
++-------------------+------------------+------------------+
+only showing top 20 rows
 
 
 
