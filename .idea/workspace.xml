@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1afb76af-9c11-4edd-855c-4bf873990b13" name="Changes" comment="Basic">
-      <change afterPath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/14.DAY.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/15.DAY(collect_list()).py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/10.DAY.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/10.DAY(rank()).py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,7 +234,31 @@
       <option name="project" value="LOCAL" />
       <updated>1741819451704</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Basic">
+      <option name="closed" value="true" />
+      <created>1741892346945</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1741892346945</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Basic">
+      <option name="closed" value="true" />
+      <created>1741892432876</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1741892432876</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Basic">
+      <option name="closed" value="true" />
+      <created>1741906000851</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1741906000851</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
