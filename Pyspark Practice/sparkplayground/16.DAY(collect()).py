@@ -99,6 +99,21 @@ for i,x in enumerate(bigger_list):
 
 
 
+bigger_list = df.select("customer_id","first_name","city","state").collect()
+
+for i,x in enumerate(bigger_list):
+  if "Liam" in x[:]:
+    print("We found him, he´s at postion:",i)
+    break
+
+#We found him, he´s at postion: 3
+
+
+
+
+
+
+
 
 
 
