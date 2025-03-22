@@ -379,3 +379,66 @@ df_filtered = df.filter(col("department").isin(departments))
 
 # Negate the filter (not in list)
 df_filtered = df.filter(~col("department").isin(departments))
+
+
+
+
+
+
+
+
+
+
+from pyspark.sql.functions import count, sum, avg, min, max, countDistinct, collect_list, collect_set
+
+
+
+#Count rows
+df.count()
+
+#Count Distinct Values in a column
+df.select(countDistinct("Department")).show()
+
+#Sum
+df.select(sum("Salary")).show()
+
+#Multiple Aggregations
+df.select(min("Salary"), max("Salary")).show()
+
+
+
+
+
+
+
+
+
+#Group by a single column
+df.groupBy("Department").sum("Salary").show()
+
+#GroupBy with Multiple Columns
+df.groupBy("Department", "Employee").sum("Salary").show()
+
+#Group by with multiple aggregations
+df.groupBy("Department").agg(
+    count("Employee").alias("Employee_Count"),
+    avg("Salary").alias("Average_Salary"),
+    max("Salary").alias("Max_Salary")
+)
+
+#Filter after aggregation
+df.groupBy("Department").agg(sum("Salary").alias("Total_Salary")).filter("Total_Salary > 8000").show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
