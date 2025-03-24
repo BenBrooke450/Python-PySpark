@@ -17,6 +17,9 @@ df.show()
 
 
 
+
+
+
 #Explicit Schema
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType
 
@@ -160,6 +163,8 @@ df = spark.read.format("json").schema(schema).load("/path/to/sample.json")
 
 
 
+
+
 # Select single column
 df = df.select("name")
 
@@ -169,6 +174,9 @@ df = df.select("name", "age")
 # Select columns dynamically
 columns_to_select = ["name", "department"]
 df = df.select(*columns_to_select)
+
+
+
 
 
 
@@ -238,6 +246,8 @@ df = df.withColumn("tax", expr("salary * 0.2"))
 # Add a column with conditional logic
 df = df.withColumn("high_earner", when(col("salary") > 55000, "Yes").otherwise("No"))
 
+
+
 # Case When with multiple conditions
 df = df.withColumn(
     "salary_category",
@@ -245,6 +255,8 @@ df = df.withColumn(
     .when((col("salary") >= 60000) & (col("salary") < 90000), "Medium")
     .otherwise("High")
 )
+
+
 
 # Add multiple columns at once
 df = df.withColumns({
