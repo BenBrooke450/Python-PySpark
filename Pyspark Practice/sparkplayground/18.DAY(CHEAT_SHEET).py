@@ -466,6 +466,10 @@ df.groupBy("Department").agg(sum("Salary").alias("Total_Salary")).filter("Total_
 
 
 
+
+
+
+
 # Basic Join
 df1.join(df2, on="id", how="inner")
 
@@ -487,6 +491,11 @@ result = df1.join(df2, on="id", how="left").select(df1["*"], df2["state"] , df2[
 # Broadcast Join for Small DataFrames
 from pyspark.sql.functions import broadcast
 df1.join(broadcast(df2), on="id", how="inner")
+
+
+
+
+
 
 
 
@@ -637,6 +646,10 @@ df = df.withColumn("formatted_date8", date_format("date_parsed", "yyyy.MM.dd"))
 
 
 
+
+
+
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
     current_date, date_add, date_sub, datediff, add_months,
@@ -748,6 +761,17 @@ df = df.withColumn("sum_with_constant", col("col1") + 5)
 # Input: col1 = 10
 # Output: 5 (col1 - 5)
 df = df.withColumn("difference_with_constant", col("col1") - 5)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -882,6 +906,15 @@ df = df.withColumn("length_of_text", length(col("text")))
 
 
 
+
+
+
+
+
+
+
+
+
 # 1. Substring: Extract substring from the full_name starting from position 1 (inclusive) with length 4
 # Input: "John_Doe_30"
 # Output: "John"
@@ -916,6 +949,11 @@ df = df.withColumn("last_name", split(col("full_name"), "_")[1])
 # Input: "John_Doe_30"
 # Output: "30"
 df = df.withColumn("age", split(col("full_name"), "_")[2])
+
+
+
+
+
 
 
 
@@ -968,6 +1006,11 @@ df.show()
 
 
 
+
+
+
+
+
 from pyspark.sql.window import Window
 from pyspark.sql.functions import col, sum, avg, min, max, count
 
@@ -993,6 +1036,13 @@ df = df.withColumn("total_rows", count("salary").over(window_spec5))
 
 # Show result
 df.show()
+
+
+
+
+
+
+
 
 
 
