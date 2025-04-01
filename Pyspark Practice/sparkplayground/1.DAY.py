@@ -94,6 +94,10 @@ df.withColumnRenamed("max(product_name)","product_name").withColumnRenamed("max(
 
 
 
+
+
+
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, lit, contains, when, sum, avg, round,max, row_number
 from pyspark.sql.window import Window

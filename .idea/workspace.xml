@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1afb76af-9c11-4edd-855c-4bf873990b13" name="Changes" comment="Basic">
+      <change afterPath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/21.DAY(concat()).py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/18.DAY(CHEAT_SHEET).py" beforeDir="false" afterPath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/18.DAY(CHEAT_SHEET).py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/20.DAY(Practice_of_CHEAT_SHEET).py" beforeDir="false" afterPath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/20.DAY(Practice_of_CHEAT_SHEET).py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/1.DAY.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/1.DAY.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/4.DAY.py" beforeDir="false" afterPath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/4.DAY.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -364,7 +365,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743098251094</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Basic">
+      <option name="closed" value="true" />
+      <created>1743275549176</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1743275549176</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

@@ -70,10 +70,6 @@ df = df.withColumn("email", when(col("state") == "TX",None).otherwise(col("email
 
 count_of_nulls = df.filter(col("email").isNull()).count()
 
-
-
-
-
 print(count_of_nulls)
 #6
 
