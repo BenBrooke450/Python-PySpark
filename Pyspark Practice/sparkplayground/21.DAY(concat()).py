@@ -114,6 +114,39 @@ df.show()
 
 
 
+# 1. Concatenate two strings
+# Input: "hello world" + " !!!"
+# Output: "hello world !!!"
+df = df.withColumn("concatenated_2_cols", concat(col("col1"), col("col2")))
+df = df.withColumn("concatenated_col_with_lit", concat(col("text"), lit(" !!!")))
+
+
+
+
+
+# 2. Concatenate columns with a separator (Space)
+# Input: ("John", "Doe", "30")
+# Output: "John Doe 30"
+df = df.withColumn("full_name", concat_ws(" ", col("first_name"), col("last_name"), col("age")))
+
+
+
+
+
+# 3. Concatenate columns with a separator (Comma)
+# Input: ("John", "Doe", "30")
+# Output: "John, Doe, 30"
+df = df.withColumn("full_name_comma", concat_ws(", ", col("first_name"), col("last_name"), col("age")))
+
+
+
+
+
+
+# 4. Concatenate with a custom string
+# Input: ("John", "Doe")
+# Output: "Name: John Doe"
+df = df.withColumn("name", concat_ws("", lit("Name: "), col("first_name"), lit(" "), col("last_name")))
 
 
 
