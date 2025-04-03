@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1afb76af-9c11-4edd-855c-4bf873990b13" name="Changes" comment="Basic">
-      <change afterPath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/22.DAY(isnull,isnotnull,isnan,isNotNull,isNull,ifnull).py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/23.DAY(split()).py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/22.DAY(isnull,isnotnull,isnan,isNotNull,isNull,ifnull).py" beforeDir="false" afterPath="$PROJECT_DIR$/Pyspark Practice/sparkplayground/22.DAY(isnull,isnotnull,isnan,isNotNull,isNull,ifnull).py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -388,7 +387,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743546973604</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Basic">
+      <option name="closed" value="true" />
+      <created>1743634463243</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1743634463243</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

@@ -152,3 +152,114 @@ df.show()
 """
 
 
+
+
+
+
+
+
+
+
+
+
+df = df.withColumn("Nulls_column",when(isnull(df["A"]) | isnull(df["B"]) ,"Has_Null _Values").otherwise("A_&_B_all_clear"))
+
+df.show()
+"""
++--------+--------+------+---------+------+----------------+
+|       A|       B|     C|        D|     E|    Nulls_column|
++--------+--------+------+---------+------+----------------+
+|   apple|     cat|   red|     NULL|  high| A_&_B_all_clear|
+|  banana|    NULL|  blue|   circle|medium|Has_Null _Values|
+|    NULL|     dog|  NULL| triangle|   low|Has_Null _Values|
+|  cherry|elephant| green|   square|  high| A_&_B_all_clear|
+|    date|    NULL|yellow|     NULL|  NULL|Has_Null _Values|
+|    NULL|     fox|purple|  hexagon|   low|Has_Null _Values|
+|     fig|    goat|  NULL|  octagon|  NULL| A_&_B_all_clear|
+|   grape|   horse|orange|rectangle|medium| A_&_B_all_clear|
+|honeydew|  iguana|  pink|     NULL|  high| A_&_B_all_clear|
+|    NULL|  jaguar| black|  diamond|   low|Has_Null _Values|
++--------+--------+------+---------+------+----------------+
+"""
+
+
+
+
+
+
+
+
+df = df.filter(isnull(df["A"]) | isnull(df["B"]))
+
+df.show()
+"""
++------+------+------+--------+------+
+|     A|     B|     C|       D|     E|
++------+------+------+--------+------+
+|banana|  NULL|  blue|  circle|medium|
+|  NULL|   dog|  NULL|triangle|   low|
+|  date|  NULL|yellow|    NULL|  NULL|
+|  NULL|   fox|purple| hexagon|   low|
+|  NULL|jaguar| black| diamond|   low|
++------+------+------+--------+------+
+"""
+
+
+
+
+
+
+
+
+df = df.select(isnull(df["A"]), ifnull(df["B"],lit("B_has_nulls")).alias("B_null"))
+
+df.show()
+"""
++-----------+-----------+
+|(A IS NULL)|     B_null|
++-----------+-----------+
+|      false|        cat|
+|      false|B_has_nulls|
+|       true|        dog|
+|      false|   elephant|
+|      false|B_has_nulls|
+|       true|        fox|
+|      false|       goat|
+|      false|      horse|
+|      false|     iguana|
+|       true|     jaguar|
++-----------+-----------+
+"""
+
+
+
+
+
+
+
+
+
+df = df.na.drop().show()
+"""
++------+--------+------+---------+------+
+|     A|       B|     C|        D|     E|
++------+--------+------+---------+------+
+|cherry|elephant| green|   square|  high|
+| grape|   horse|orange|rectangle|medium|
++------+--------+------+---------+------+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
