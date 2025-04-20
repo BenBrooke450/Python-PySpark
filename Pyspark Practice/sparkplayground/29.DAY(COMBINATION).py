@@ -216,3 +216,67 @@ df = df.withColumn("concat_again",split(col("concat"),"-")).show()
 +-----+------+--------+-----------------+--------------------+
 """
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+from pyspark.sql import SparkSession
+from pyspark.sql import Row
+from pyspark.sql.functions import col, when, collect_set, array_join, array_sort, collect_list, concat_ws, lit, split, concat
+from pyspark.sql.window import Window
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+
+# Initialize SparkSession
+
+spark = SparkSession.builder.appName("ExtractNestedData").getOrCreate()
+
+data = [
+    Row(name = "Ben",A='apple', B='cat', C='red', D=None, E='high'),
+    Row(name = "Ben",A='banana', B=None, C='blue', D='circle', E='medium'),
+    Row(name = "Ben",A='cherry', B='dog', C=None, D='triangle', E='low'),
+    Row(name = "Ana",A='cherry', B='elephant', C='green', D='square', E='high'),
+    Row(name = "Ana",A='date', B=None, C='yellow', D=None, E=None),
+    Row(name = "Marta",A='cherry', B='fox', C='purple', D='hexagon', E='low'),
+    Row(name = "Ana",A='fig', B='goat', C=None, D='octagon', E=None),
+    Row(name = "Ben",A='grape', B='horse', C='orange', D='rectangle', E='medium'),
+    Row(name = "Marta",A='apple', B='iguana', C='pink', D=None, E='high'),
+    Row(name = "Marta",A='apple', B='jaguar', C='black', D='diamond', E='low')
+]
+
+df = spark.createDataFrame(data)
+
+df = df.groupBy(df.name).agg(collect_list(df.A)).show()
+"""
++-----+--------------------+
+| name|     collect_list(A)|
++-----+--------------------+
+|Marta|[cherry, apple, a...|
+|  Ana| [cherry, date, fig]|
+|  Ben|[apple, banana, c...|
++-----+--------------------+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
