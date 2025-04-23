@@ -280,3 +280,89 @@ df = df.groupBy(df.name).agg(collect_list(df.A)).show()
 
 
 
+
+
+from pyspark.sql import SparkSession
+from pyspark.sql import Row
+from pyspark.sql.functions import rank, col, when, collect_set, array_join, array_sort, collect_list, concat_ws, lit, split, concat, dense_rank
+
+from pyspark.sql.window import Window
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+
+# Initialize SparkSession
+
+spark = SparkSession.builder.appName("ExtractNestedData").getOrCreate()
+
+data = [
+    Row(name = "Ben",A='apple', B='cat', C='red', D=None, E='high'),
+    Row(name = "Ben",A='banana', B=None, C='blue', D='circle', E='medium'),
+    Row(name = "Ben",A='cherry', B='dog', C=None, D='triangle', E='low'),
+    Row(name = "Ana",A='cherry', B='elephant', C='green', D='square', E='high'),
+    Row(name = "Ana",A='date', B=None, C='yellow', D=None, E=None),
+    Row(name = "Marta",A='cherry', B='fox', C='purple', D='hexagon', E='low'),
+    Row(name = "Ana",A='fig', B='goat', C=None, D='octagon', E=None),
+    Row(name = "Ben",A='grape', B='horse', C='orange', D='rectangle', E='medium'),
+    Row(name = "Marta",A='apple', B='iguana', C='pink', D=None, E='high'),
+    Row(name = "Marta",A='apple', B='jaguar', C='black', D='diamond', E='low')
+]
+
+df = spark.createDataFrame(data)
+
+win = Window.partitionBy(df.name).orderBy(df.A)
+
+df = df.withColumn("Dense_Rank",dense_rank().over(win)).show()
+
+"""
++-----+------+--------+------+---------+------+----------+
+| name|     A|       B|     C|        D|     E|Dense_Rank|
++-----+------+--------+------+---------+------+----------+
+|  Ana|cherry|elephant| green|   square|  high|         1|
+|  Ana|  date|    NULL|yellow|     NULL|  NULL|         2|
+|  Ana|   fig|    goat|  NULL|  octagon|  NULL|         3|
+|  Ben| apple|     cat|   red|     NULL|  high|         1|
+|  Ben|banana|    NULL|  blue|   circle|medium|         2|
+|  Ben|cherry|     dog|  NULL| triangle|   low|         3|
+|  Ben| grape|   horse|orange|rectangle|medium|         4|
+|Marta| apple|  iguana|  pink|     NULL|  high|         1|
+|Marta| apple|  jaguar| black|  diamond|   low|         1|
+|Marta|cherry|     fox|purple|  hexagon|   low|         2|
++-----+------+--------+------+---------+------+----------+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+win = Window.partitionBy(df.name).orderBy(df.A)
+
+df = df.filter((df.A == "apple") | (df.B == "apple") | (df.C == "apple")).show()
+"""
++-----+-----+------+-----+-------+----+
+| name|    A|     B|    C|      D|   E|
++-----+-----+------+-----+-------+----+
+|  Ben|apple|   cat|  red|   NULL|high|
+|Marta|apple|iguana| pink|   NULL|high|
+|Marta|apple|jaguar|black|diamond| low|
++-----+-----+------+-----+-------+----+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
