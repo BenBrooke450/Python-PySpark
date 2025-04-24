@@ -141,3 +141,39 @@ only showing top 15 rows
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+from pyspark.sql.functions import col, row_number
+
+
+def drop_duplicates(df_rs_fa: DataFrame) -> DataFrame:
+    filtered_columns = [
+        col
+        for col in df_rs_fa.columns
+        if not (col.startswith("...") or col.startswith("..."))
+
+    ]
+
+    print(filtered_columns)
+    # Filtering out duplicates from the dataframe
+    win = Window.partitionBy(filtered_columns).orderBy("...")
+    df_rs_fa = df_rs_fa.withColumn("drv_df_Rank", row_number().over(win))
+    df_rs_fa = df_rs_fa.filter(col("drv_df_Rank") == 1)
+    df_rs_fa = df_rs_fa.drop(col("drv_df_Rank"))
+    return df_rs_fa
+
+
+df_rs_fa = drop_duplicates(df_rs_fa)
+
+df_rs_fa.display()
