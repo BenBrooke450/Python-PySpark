@@ -93,6 +93,8 @@ only showing top 20 rows
 
 
 
+
+
 test = (df_electric_cars_casualty.withColumn("rank_over_avg_age",row_number()
                                             .over(Window.partitionBy("generic_make_model")
                                                   .orderBy("average_age_of_vehicle")))
@@ -132,6 +134,65 @@ only showing top 20 rows
 
 
 
+
+####################################################
+
+
+
+df_rs_fa = df_rs_fa.withColumn(
+    'drv_greater_5_prc_bm_blasts',
+    when(
+        col('FATESTCD') == 'OCCUR') & (col('FAOBJ') == ‘ABC’) & (col('FAORRES') == 'Y'),
+            first(col('FAORRES')).over(win) == 1, 'Y').otherwise('N')
+            )
+
+
+"""
+This won't work as it will take the first of within the over statement NOT (col('FAORRES') == 'Y'
+"""
+
+
+
+
+####################################################
+
+
+
+
+
+win = Window.partitionBy('SUBJID', 'VISIT').orderBy('SUBJID')
+
+df_rs_fa = df_rs_fa.withColumn(
+    'drv_greater_5_prc_bm_blasts',
+    when(
+        max(when(
+            (col('FATESTCD') == 'OCCUR') & (col('FAOBJ') == ‘ABC’) & (col('FAORRES') == 'Y'),lit(1)).otherwise(0))
+            .over(win) == 1, 'Y').otherwise('N')
+            )
+
+df_rs_fa = df_rs_fa.withColumn(
+    'drv_reapp_blasts_blood',
+    when(
+        max(when(
+            (col('FATESTCD') == 'OCCUR') & (col('FAOBJ') == ‘ABC’) & (col('FAORRES') == 'Y'),lit(1)).otherwise(0))
+            .over(win) == 1, 'Y').otherwise('N')
+            )
+
+df_rs_fa = df_rs_fa.withColumn(
+    'drv_dev_emd',
+    when(
+        max(when(
+            (col('FATESTCD') == 'OCCUR') & (col('FAOBJ') == ‘ABC’) & (col('FAORRES') == 'Y'),lit(1)).otherwise(0))
+            .over(win) == 1, 'Y').otherwise('N')
+            )
+
+df_rs_fa = df_rs_fa.withColumn(
+    'drv_molecular_relapse',
+    when(
+        max(when(
+            (col('FATESTCD') == 'OCCUR') & (col('FAOBJ') == ‘ABC’) & (col('FAORRES') == 'Y'),lit(1)).otherwise(0))
+            .over(win) == 1, 'Y').otherwise('N')
+            )
 
 
 
