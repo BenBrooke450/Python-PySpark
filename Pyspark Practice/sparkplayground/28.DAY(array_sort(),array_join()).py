@@ -100,6 +100,24 @@ df.withColumn("new_column",array_sort(collect_list("A").over(Window.partitionBy(
 
 
 
+df.withColumn("new_column",collect_list("A").over(Window.partitionBy("name"))).show()
+"""
++-----+------+--------+------+---------+------+--------------------+
+| name|     A|       B|     C|        D|     E|          new_column|
++-----+------+--------+------+---------+------+--------------------+
+|  Ana|cherry|elephant| green|   square|  high| [cherry, date, fig]|
+|  Ana|  date|    NULL|yellow|     NULL|   low| [cherry, date, fig]|
+|  Ana|   fig|    goat|  NULL|  octagon|  high| [cherry, date, fig]|
+|  Ben| apple|     cat|   red|     NULL|  high|[apple, banana, c...|
+|  Ben|banana|    NULL|  blue|   circle|medium|[apple, banana, c...|
+|  Ben|cherry|     dog|  NULL| triangle|   low|[apple, banana, c...|
+|  Ben| grape|   horse|orange|rectangle|medium|[apple, banana, c...|
+|Marta|cherry|     fox|purple|  hexagon|   low|[cherry, apple, a...|
+|Marta| apple|  iguana|  pink|     NULL|   low|[cherry, apple, a...|
+|Marta| apple|  jaguar| black|  diamond|   low|[cherry, apple, a...|
++-----+------+--------+------+---------+------+--------------------+
+"""
+
 
 
 

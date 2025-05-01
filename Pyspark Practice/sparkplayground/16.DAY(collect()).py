@@ -123,6 +123,70 @@ for i,x in enumerate(bigger_list):
 
 
 
+from pyspark.sql import SparkSession
+from pyspark.sql import Row
+from pyspark.sql.functions import col, when, max, lit, lag, concat_ws, collect_list
+
+from pyspark.sql.window import Window
+from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+
+# Initialize SparkSession
+
+spark = SparkSession.builder.appName("ExtractNestedData").getOrCreate()
+
+data = [
+    Row(name = "Ben",A='apple', B='cat', C='red', D=None, E='high'),
+    Row(name = "Ben",A='banana', B=None, C='blue', D='circle', E='medium'),
+    Row(name = "Ben",A='cherry', B='dog', C=None, D='triangle', E='low'),
+    Row(name = "Ana",A='cherry', B='elephant', C='green', D='square', E='high'),
+    Row(name = "Ana",A='date', B=None, C='yellow', D=None, E='low'),
+    Row(name = "Marta",A='cherry', B='fox', C='purple', D='hexagon', E='low'),
+    Row(name = "Ana",A='fig', B='goat', C=None, D='octagon', E='high'),
+    Row(name = "Ben",A='grape', B='horse', C='orange', D='rectangle', E='medium'),
+    Row(name = "Marta",A='apple', B='iguana', C='pink', D=None, E='low'),
+    Row(name = "Marta",A='apple', B='jaguar', C='black', D='diamond', E='low')
+]
+
+df = spark.createDataFrame(data)
 
 
+df = df.withColumn("new_column",collect_list("A").over(Window.partitionBy("name")))
+
+new_column = df.select("new_column").collect()
+
+print(new_column)
+#[Row(new_column=['cherry', 'date', 'fig']), Row(new_column=['cherry', 'date', 'fig']), Row(new_column=['cherry', 'date', 'fig']), Row(new_column=['apple', 'banana', 'cherry', 'grape']), Row(new_column=['apple', 'banana', 'cherry', 'grape']), Row(new_column=['apple', 'banana', 'cherry', 'grape']), Row(new_column=['apple', 'banana', 'cherry', 'grape']), Row(new_column=['cherry', 'apple', 'apple']), Row(new_column=['cherry', 'apple', 'apple']), Row(new_column=['cherry', 'apple', 'apple'])]
+
+
+
+
+
+
+
+
+
+
+df = df.withColumn("new_column",collect_list("A").over(Window.partitionBy("name")))
+
+new_column = df.select("new_column").collect()
+
+df = spark.createDataFrame(new_column)
+
+df.show()
+"""
++--------------------+
+|          new_column|
++--------------------+
+| [cherry, date, fig]|
+| [cherry, date, fig]|
+| [cherry, date, fig]|
+|[apple, banana, c...|
+|[apple, banana, c...|
+|[apple, banana, c...|
+|[apple, banana, c...|
+|[cherry, apple, a...|
+|[cherry, apple, a...|
+|[cherry, apple, a...|
++--------------------+
+"""
 
