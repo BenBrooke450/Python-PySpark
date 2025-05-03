@@ -77,6 +77,118 @@ df.show()
 
 
 
+
+
+data = [
+    Row(name = "Ben" ,A='apple', B='cat', C='red', D=None, E='high'),
+    Row(name = "Ben" ,A='banana', B=None, C='blue', D='circle', E='medium'),
+    Row(name = "Ben" ,A='cherry', B='dog', C=None, D='triangle', E='low'),
+    Row(name = "Ana" ,A='cherry', B='elephant', C='green', D='square', E='high'),
+    Row(name = "Ana" ,A='date', B=None, C='yellow', D=None, E='low'),
+    Row(name = "Marta" ,A='cherry', B='fox', C='purple', D='hexagon', E='low'),
+    Row(name = "Ana" ,A='fig', B='goat', C=None, D='octagon', E='high'),
+    Row(name = "Ben" ,A='grape', B='horse', C='orange', D='rectangle', E='medium'),
+    Row(name = "Jemma" ,A='cherry', B='jaguar', C='black', D='diamond', E='low'),
+    Row(name = "Marta" ,A='apple', B='iguana', C='pink', D=None, E='low'),
+    Row(name = "Marta" ,A='grape', B='jaguar', C='black', D='diamond', E='low'),
+    Row(name = "Jemma" ,A='grape', B='jaguar', C='black', D='diamond', E='low'),
+    Row(name = "Jemma" ,A='banana', B='jaguar', C='black', D='diamond', E='low')
+]
+
+df = spark.createDataFrame(data)
+
+win = Window.partitionBy('name').orderBy('A')
+
+df = df.withColumn(
+    'drv_apple',
+    when((col('A') == 'apple') ,lit(1)).otherwise(0))
+df.show()
+"""
++-----+------+--------+------+---------+------+---------+
+| name|     A|       B|     C|        D|     E|drv_apple|
++-----+------+--------+------+---------+------+---------+
+|  Ben| apple|     cat|   red|     NULL|  high|        1|
+|  Ben|banana|    NULL|  blue|   circle|medium|        0|
+|  Ben|cherry|     dog|  NULL| triangle|   low|        0|
+|  Ana|cherry|elephant| green|   square|  high|        0|
+|  Ana|  date|    NULL|yellow|     NULL|   low|        0|
+|Marta|cherry|     fox|purple|  hexagon|   low|        0|
+|  Ana|   fig|    goat|  NULL|  octagon|  high|        0|
+|  Ben| grape|   horse|orange|rectangle|medium|        0|
+|Jemma|cherry|  jaguar| black|  diamond|   low|        0|
+|Marta| apple|  iguana|  pink|     NULL|   low|        1|
+|Marta| grape|  jaguar| black|  diamond|   low|        0|
+|Jemma| grape|  jaguar| black|  diamond|   low|        0|
+|Jemma|banana|  jaguar| black|  diamond|   low|        0|
++-----+------+--------+------+---------+------+---------+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+win = Window.partitionBy('name').orderBy('A')
+
+df = df.withColumn(
+    'drv_apple',
+    when(
+        max(when((col('A') == 'apple') ,lit(1)).otherwise(0))
+        .over(win) == 1, 'Y'))
+
+df.show()
+"""
++-----+------+--------+------+---------+------+---------+
+| name|     A|       B|     C|        D|     E|drv_apple|
++-----+------+--------+------+---------+------+---------+
+|  Ana|cherry|elephant| green|   square|  high|     NULL|
+|  Ana|  date|    NULL|yellow|     NULL|   low|     NULL|
+|  Ana|   fig|    goat|  NULL|  octagon|  high|     NULL|
+|  Ben| apple|     cat|   red|     NULL|  high|        Y|
+|  Ben|banana|    NULL|  blue|   circle|medium|        Y|
+|  Ben|cherry|     dog|  NULL| triangle|   low|        Y|
+|  Ben| grape|   horse|orange|rectangle|medium|        Y|
+|Jemma|banana|  jaguar| black|  diamond|   low|     NULL|
+|Jemma|cherry|  jaguar| black|  diamond|   low|     NULL|
+|Jemma| grape|  jaguar| black|  diamond|   low|     NULL|
+|Marta| apple|  iguana|  pink|     NULL|   low|        Y|
+|Marta|cherry|     fox|purple|  hexagon|   low|        Y|
+|Marta| grape|  jaguar| black|  diamond|   low|        Y|
++-----+------+--------+------+---------+------+---------+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 from pyspark.sql import SparkSession
 from pyspark.sql import Row
 from pyspark.sql.functions import col, when, max, lit, lag, concat_ws
