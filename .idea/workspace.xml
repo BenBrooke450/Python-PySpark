@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1afb76af-9c11-4edd-855c-4bf873990b13" name="Changes" comment="Basic">
-      <change afterPath="$PROJECT_DIR$/Pyspark Practice/SDTM/4.COLLECT_LIST,OVER.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PySpark Learned Library/0.Functions/##.collect().md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PySpark Learned Library/0.Functions/##.contains(##).md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PySpark Learned Library/0.Functions/##.display().md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PySpark Learned Library/0.Functions/##.select(##).md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PySpark Learned Library/0.Functions/coalesce().md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +69,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-53e2683a6804-9cdd278e9d02-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.26094.141" />
+        <option value="bundled-python-sdk-b3d66beaba9a-c6efb3732140-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.26199.168" />
       </set>
     </attachedChunks>
   </component>
@@ -77,14 +81,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1737851793997</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Basic">
-      <option name="closed" value="true" />
-      <created>1741130563596</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1741130563596</updated>
     </task>
     <task id="LOCAL-00017" summary="Basic">
       <option name="closed" value="true" />
@@ -470,7 +466,15 @@
       <option name="project" value="LOCAL" />
       <updated>1750890896651</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="Basic">
+      <option name="closed" value="true" />
+      <created>1751582810537</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1751582810537</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
