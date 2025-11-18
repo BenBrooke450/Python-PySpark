@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1afb76af-9c11-4edd-855c-4bf873990b13" name="Changes" comment="Basic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PySpark Learned Library/0.Functions/##.rdd.flatMap().md" beforeDir="false" afterPath="$PROJECT_DIR$/PySpark Learned Library/0.Functions/##.rdd.flatMap().md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PySpark Learned Library/0.Functions/##.rdd.map().md" beforeDir="false" afterPath="$PROJECT_DIR$/PySpark Learned Library/0.Functions/##.rdd.map().md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,14 +78,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1737851793997</updated>
-    </task>
-    <task id="LOCAL-00028" summary="Basic">
-      <option name="closed" value="true" />
-      <created>1742242849335</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1742242849335</updated>
     </task>
     <task id="LOCAL-00029" summary="Basic">
       <option name="closed" value="true" />
@@ -469,7 +463,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763412480430</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="Basic">
+      <option name="closed" value="true" />
+      <created>1763484840162</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1763484840162</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
